@@ -1,51 +1,61 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
+-- Define the test bench entity
 entity TestBench_CLA is
+-- Testbench does not have any ports
 end TestBench_CLA;
 
 architecture behavior of TestBench_CLA is
-
-    component Carry_Look_Ahead_Adder
+    -- Component Declaration for the Carry Adder
+    component carry_adder
         Port (
-            A : in STD_LOGIC_VECTOR(3 downto 0);
-            B : in STD_LOGIC_VECTOR(3 downto 0);
-            Cin : in STD_LOGIC;
-            Sum : out STD_LOGIC_VECTOR(3 downto 0);
-            Cout : out STD_LOGIC
+            A     : in  STD_LOGIC;
+            B     : in  STD_LOGIC;
+            Cin   : in  STD_LOGIC;
+            S     : out STD_LOGIC;
+            G     : out STD_LOGIC
         );
     end component;
 
-    -- Test inputs
-    signal A, B: STD_LOGIC_VECTOR(3 downto 0);
-    signal Cin: STD_LOGIC;
-    signal Sum: STD_LOGIC_VECTOR(3 downto 0);
-    signal Cout: STD_LOGIC;
+    -- Signals for interfacing with the component
+    signal tb_A, tb_B, tb_Cin : STD_LOGIC := '0';
+    signal tb_S, tb_G : STD_LOGIC;
 
 begin
-
     -- Instantiate the Unit Under Test (UUT)
-    uut: Carry_Look_Ahead_Adder port map (
-        A => A,
-        B => B,
-        Cin => Cin,
-        Sum => Sum,
-        Cout => Cout
+    uut: carry_adder port map (
+        A => tb_A,
+        B => tb_B,
+        Cin => tb_Cin,
+        S => tb_S,
+        G => tb_G
     );
 
-    -- Stimulus process to apply test vectors
-    stimulus: process
+    -- Stimulus process
+    stim_proc: process
     begin
-        -- Apply a set of test vectors
-        A <= "0000"; B <= "0000"; Cin <= '0'; wait for 10 ns;
-        A <= "0001"; B <= "0011"; Cin <= '0'; wait for 10 ns;
-        A <= "0101"; B <= "0101"; Cin <= '1'; wait for 10 ns;
-        A <= "1111"; B <= "1111"; Cin <= '1'; wait for 10 ns;
-        -- Complete the testing
-        -- wait, then end the process
+        -- Test all input combinations
+        tb_A <= '0'; tb_B <= '0'; tb_Cin <= '0';
+        wait for 10 ns;
+        tb_A <= '0'; tb_B <= '0'; tb_Cin <= '1';
+        wait for 10 ns;
+        tb_A <= '0'; tb_B <= '1'; tb_Cin <= '0';
+        wait for 10 ns;
+        tb_A <= '0'; tb_B <= '1'; tb_Cin <= '1';
+        wait for 10 ns;
+        tb_A <= '1'; tb_B <= '0'; tb_Cin <= '0';
+        wait for 10 ns;
+        tb_A <= '1'; tb_B <= '0'; tb_Cin <= '1';
+        wait for 10 ns;
+        tb_A <= '1'; tb_B <= '1'; tb_Cin <= '0';
+        wait for 10 ns;
+        tb_A <= '1'; tb_B <= '1'; tb_Cin <= '1';
+        wait for 10 ns;
+
+        -- Complete the simulation
         wait;
     end process;
 
 end behavior;
+
