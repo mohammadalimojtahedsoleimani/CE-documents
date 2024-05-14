@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE transactions SYSTEM "transactions.dtd">
+<transactions>
+    <transaction>
+        <sourceAccount>
+            <branchCode>30-90-50</branchCode>
+            <accountNumber>1234567890</accountNumber>
+            <bankName>Bank A</bankName>
+        </sourceAccount>
+        <destinationAccount>
+            <branchCode>30-90-51</branchCode>
+            <accountNumber>0987654321</accountNumber>
+            <bankName>Bank B</bankName>
+        </destinationAccount>
+        <transactionID id="T12345">T12345</transactionID>
+        <transactionAmount currency="USD">100.00</transactionAmount>
+        <transactionDate>
+            <timeZone format="dd/mm/yyyy">14/05/2024</timeZone>
+            <time format="hh:mm">14:30</time>
+        </transactionDate>
+    </transaction>
+</transactions>

@@ -1,0 +1,28 @@
+<!DOCTYPE transactions [
+        <!ELEMENT transactions (transaction+)>
+        <!ELEMENT transaction (sourceAccount, destinationAccount, transactionID, transactionAmount, transactionDate)>
+
+        <!ELEMENT sourceAccount (branchCode, accountNumber, bankName)>
+        <!ELEMENT destinationAccount (branchCode, accountNumber, bankName)>
+        <!ELEMENT branchCode (#PCDATA)>
+        <!ELEMENT accountNumber (#PCDATA)>
+        <!ELEMENT bankName (#PCDATA)>
+
+        <!ELEMENT transactionID (#PCDATA)>
+        <!ELEMENT transactionAmount (#PCDATA)>
+        <!ELEMENT transactionDate (timeZone, time)>
+        <!ELEMENT timeZone (#PCDATA)>
+        <!ELEMENT time (#PCDATA)>
+
+        <!ATTLIST transactionID
+                id CDATA #REQUIRED>
+
+        <!ATTLIST transactionAmount
+                currency (IRT | IRR | USD) #REQUIRED>
+
+        <!ATTLIST timeZone
+                format CDATA #FIXED "dd/mm/yyyy">
+
+        <!ATTLIST time
+                format CDATA #FIXED "hh:mm">
+        ]>
